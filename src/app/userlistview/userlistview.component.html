@@ -1,0 +1,3 @@
+<div class="container" *ngFor="let user of users$ | async">
+       <app-itemview [user] = 'user' (toDeleteUser) = 'deleteUser($event)'></app-itemview>
+</div>

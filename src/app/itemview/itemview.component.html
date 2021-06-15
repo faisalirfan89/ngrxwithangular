@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+        {{user.name}}
+      </div>
+      <div class="col">
+        {{user.email}}
+      </div>
+      <div class="col">
+        {{user.address}}
+      </div>
+      <div class="col">
+        <button  class="btn btn-danger" (click)="onClick()"> delete user</button>
+        <button class="btn btn-primary" (click)="open(mymodal)">update</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input required #name="ngModel" name="name" type="text" [(ngModel)] ="updateUser.name" class="form-control" id="exampleInputName" aria-describedby="nameHelp">
+          </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input name="email" type="text" class="form-control" id="exampleInputemail" [(ngModel)] ="updateUser.email">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Address</label>
+          <input  name="address" type="text" class="form-control" id="exampleInputaddress" [(ngModel)] ="updateUser.address">
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="update(mymodal)">Save</button>
+    </div>
+  </ng-template>

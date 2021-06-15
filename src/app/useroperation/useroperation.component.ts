@@ -3,8 +3,8 @@ import { user } from '../model/user';
 import { cloneDeep } from "lodash";
 import { createSelector, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState, selectAllUser } from './selector/useroperation.selector';
-import { add } from './action/useroperation.action';
+import { AppState, selectAllUsers } from './selector/useroperation.selector';
+import { add, addUsers } from './action/useroperation.action';
 
 @Component({
   selector: 'app-useroperation',
@@ -17,8 +17,29 @@ export class UseroperationComponent implements OnInit {
   users$:Observable<user[]>;
   constructor(private store:Store<AppState>) { 
     this.user = new user
-    this.users$ = store.select(selectAllUser)
-    debugger;
+    let initialData =  [
+      {
+          name : "Huda",
+          address : "GKP",
+          email : "huda@gmail.com",
+          id:"1"
+      },
+      {
+          name : "faisal",
+          address : "GKP",
+          email : "faisal@gmail.com",
+          id:"2"
+      },
+      {
+          name : "Nikhat",
+          address : "GKP",
+          email : "Nikhat@gmail.com",
+          id:"3"
+      }
+     
+  ]
+    this.store.dispatch(addUsers({payload:initialData}))
+    this.users$ = store.select(selectAllUsers)
   }
 
   ngOnInit(): void {

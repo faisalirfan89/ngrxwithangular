@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { user } from '../model/user';
 import { remove } from '../useroperation/action/useroperation.action';
-import { AppState, selectAllUser } from '../useroperation/selector/useroperation.selector';
+import { AppState,selectAllUsers } from '../useroperation/selector/useroperation.selector';
 
 @Component({
   selector: 'app-userlistview',
@@ -14,7 +14,7 @@ export class UserlistviewComponent implements OnInit {
   users$:Observable<user[]>;
   constructor(private store:Store<AppState>) { 
     debugger;
-    this.users$ = store.select(selectAllUser)
+    this.users$ = store.select(selectAllUsers)
     console.log(this.users$)
     debugger;
   }

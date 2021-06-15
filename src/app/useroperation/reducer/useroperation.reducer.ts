@@ -1,53 +1,49 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { user } from 'src/app/model/user';
 import * as userAction from 'src/app/useroperation/action/useroperation.action'
-import { AppState } from '../selector/useroperation.selector';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { entries, initial, update } from 'lodash';
+
+export interface State extends EntityState<user> {
+    // additional entity state properties
+    selectedUserId: string | "";
+  }
 
 
+ 
 
+export function selectUserId(a: user): string {
+    //In this case this would be optional since primary key is id
+    return a.id;
+  }
 
-export const initialState: user[] = [
-    {
-        name : "Huda",
-        address : "GKP",
-        email : "huda@gmail.com",
-        id:"1"
-    },
-    {
-        name : "faisal",
-        address : "GKP",
-        email : "faisal@gmail.com",
-        id:"2"
-    },
-    {
-        name : "Nikhat",
-        address : "GKP",
-        email : "Nikhat@gmail.com",
-        id:"3"
-    }
-   
-]
+  export const adapter: EntityAdapter<user> = createEntityAdapter<user>({
+    selectId: selectUserId,
+  });
 
+  export const initialState: State = adapter.getInitialState({
+    // additional entity state properties
+    selectedUserId: ""
+
+  });
+
+  export function reducer(state: State | undefined, action: Action) {
+    return userReducer(state, action);
+  }
+ 
 
 export const userReducer = createReducer(
     initialState,
     on(userAction.add, (state,{payload}) =>{
-        return [...state, payload]
+        return adapter.addOne(payload, state)
     }
   ),
-  on(userAction.remove, (state, { payload }) => state.filter((user) => user.id !== payload.id)),
+  on(userAction.remove, (state, { payload }) => {return adapter.removeOne(payload.id, state);}),
+  on(userAction.addUsers, (state, { payload }) => {
+    return adapter.addMany(payload, state);
+  }),
   on(userAction.update, (state,{payload}) =>{
-    return state.map(x=>
-        {
-            if(x.id === payload.id)
-            {
-                return payload
-            }
-            else
-            {
-                return x
-            }
-        })
+    return adapter.setOne(payload, state);
 }
 ),
   );

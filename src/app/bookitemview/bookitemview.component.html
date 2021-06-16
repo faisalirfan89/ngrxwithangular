@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+        {{book.name}}
+      </div>
+      <div class="col">
+        {{book.publishYear}}
+      </div>
+      <div class="col">
+        {{book.author}}
+      </div>
+      <div class="col">
+        <button  class="btn btn-danger" (click)="onClick()"> Remove Book</button>
+        <button class="btn btn-primary" (click)="open(mymodal)">update</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input required #name="ngModel" name="name" type="text" [(ngModel)] ="updateBook.name" class="form-control" id="exampleInputName" aria-describedby="nameHelp">
+          </div>
+        <div class="mb-3">
+          <label for="exampleInputPublishYear" class="form-label">Publish Year</label>
+          <input name="email" type="text" class="form-control" id="exampleInputPublishYear1" [(ngModel)] ="updateBook.publishYear">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputAuthor" class="form-label">Author</label>
+          <input  name="address" type="text" class="form-control" id="exampleInputAuthor1" [(ngModel)] ="updateBook.author">
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="update(mymodal)">Save</button>
+    </div>
+  </ng-template>

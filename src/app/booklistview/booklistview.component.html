@@ -1,0 +1,3 @@
+<div class="container" *ngFor="let book of books$ | async">
+    <app-bookitemview [book] = 'book' (toDeleteBook) = 'deleteBook($event)'></app-bookitemview>
+</div>

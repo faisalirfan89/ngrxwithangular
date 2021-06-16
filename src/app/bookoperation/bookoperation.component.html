@@ -1,0 +1,37 @@
+<div class="container">
+    <form (ngSubmit)= "onSubmit()">
+        <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input required #name="ngModel" name="name" type="text" [(ngModel)] ="book.name" class="form-control" id="exampleInputName" aria-describedby="nameHelp">
+          </div>
+        <div class="mb-3">
+          <label for="exampleInputpublishYear" class="form-label">Publish Year</label>
+          <input name="email" type="text" [(ngModel)] ="book.publishYear" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Author</label>
+          <input  name="author" type="text" class="form-control" id="exampleInputauthor" [(ngModel)] ="book.author">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+      <div class="container">
+        <div class="container">
+            <div class="row">
+              <div class="col">
+                name
+              </div>
+              <div class="col">
+                publishYear
+              </div>
+              <div class="col">
+               Author
+              </div>
+              <div class="col">
+                Action
+               </div>
+            </div>
+          </div>
+        <app-booklistview ></app-booklistview>
+    </div>
+</div>
+
